@@ -1,0 +1,47 @@
+// Với đầu vào như bài 1, viết chương trình kiểm tra xem cây có phải là cây tìm kiếm nhị phân (BST) hay không? Nếu có in ra "YES", còn không in ra "NO".
+
+// For example:
+
+// Input	    Result
+// 5
+// 4 2 5 1 3   YES
+
+#include <iostream>
+
+using namespace std;
+
+int n,a[100];
+
+int bst(int k){
+    if(2*k+1<n){
+        if(a[k] < a[2*k+1]){
+            return 0;
+        }else{
+            if(bst(2*k+1) == 0){
+                return 0;
+            }
+        }
+    }
+    if(2*k+2<n){
+        if(a[k] > a[2*k+2]){
+            return 0;
+        }else{
+            if(bst(2*k+2) == 0){
+                return 0;
+            }
+        }
+    }
+    return 1;
+}
+
+int main(){
+    cin >> n;
+    for(int i = 0; i<n; i++){
+        cin >> a[i];
+    }
+    if(bst(0) == 1){
+        cout << "YES";
+    }else{
+        cout << "NO";
+    }
+}

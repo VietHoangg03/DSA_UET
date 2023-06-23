@@ -1,0 +1,38 @@
+// Viết chương trình in ra ký tự xuất hiện nhiều nhất trong xâu (không tính khoảng trắng). Nếu có nhiều ký tự xuất hiện như nhau, in ra ký tự xuất hiện đầu tiên trong xâu.
+
+// For example:
+
+// Input	    Result
+// abcdef      a
+// aaaabbbccd  a
+
+#include <iostream>
+#include <cstring>
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main(){
+    int max = 0, count = 0;
+    char out;
+    string s;
+    getline(cin,s);
+    map<char,int> cs;
+    for (char c:s){
+        if(c!= ' '){
+            cs[c]++;
+        }
+    }
+    for(auto pair : cs){
+        if(pair.second > max){
+            max = pair.second;
+            out = pair.first;
+        }
+    }
+    for(auto pair : cs){
+        if(pair.second == max){
+            count++;
+        }
+    }
+    cout << out;
+}

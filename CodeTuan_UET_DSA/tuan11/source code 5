@@ -1,0 +1,45 @@
+// Cho 1 xâu đầu vào chỉ gồm 2 ký tự D và I. Từ xâu này, tìm số nhỏ nhất thỏa mãn xâu, biết "I" chỉ chữ số đứng sau tăng so với chữ số đứng trước và "D" chỉ chữ số đứng sau giảm so với chữ số đứng trước. Các chữ số không được lặp lại
+
+// For example:
+
+// Input	Result
+// I       12
+// DI      213
+
+#include <iostream>
+#include <cstring>
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main(){
+    string s;
+    getline(cin,s);
+    int n = s.size();
+	n++;
+	int b[100], lasti = n;
+	for(int i = 0; i<n; i++){
+		b[i] = 0;
+	}
+	for(int i = n-1; i>=0; i--){
+		if(i == 0){
+			b[i] = lasti;
+			for(int j = 1; j<lasti-i; j++){
+				b[i+j] = lasti - j;
+			}
+			lasti = i;
+		}else{
+			if(s[i-1] == 'I' || i == 0){
+				b[i] = lasti;
+				for(int j = 1; j<lasti-i; j++){
+					b[i+j] = lasti - j;
+				}
+				lasti = i;
+			}
+		}
+	}
+	for(int i = 0; i<n; i++){
+		cout << b[i];
+	}
+	return 0;
+}

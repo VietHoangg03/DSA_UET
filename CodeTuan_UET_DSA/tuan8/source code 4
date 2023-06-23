@@ -1,0 +1,41 @@
+// Viết chương trình duyệt cây theo thứ tự là thứ tự các mức trong cây (level-order), input như bài 1. Output các mức trên các dòng khác nhau.
+
+// For example:
+
+// Input	        Result
+// 5               1
+// 1 2 3 4 5       2 3 
+//                 4 5
+
+#include <iostream>
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int a[100],n,c=1;
+
+int pr(int i){
+    for(int k = 0; k<c; k++){
+        if(c-1+k<n){
+            cout << a[c-1+k];
+            cout << " ";
+        }else{
+            return 1;
+        }
+    }
+    cout << "\n";
+    return 0;
+}
+
+int main(){
+	cin >>n;
+	for (int i = 0; i<n ; i++){
+		cin >> a[i];
+	}
+	int i = 0;
+	while (i<n){
+	    pr(i);
+	    i = 2*i+1;
+	    c = c*2;
+	}
+}

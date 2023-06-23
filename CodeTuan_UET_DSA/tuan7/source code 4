@@ -1,0 +1,25 @@
+// Cho mảng gồm n số nguyên. Viết chương trình tìm số nguyên nhỏ thứ k của mảng
+
+// For example:
+
+// Input	    Result
+// 5
+// 1 4 2 5 3
+// 2           2
+
+
+#include <iostream>
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main(){
+    int n,m, a[100];
+    cin >> n;
+    for(int i = 0; i<n; i++){
+        cin >> a[i];
+    }
+    cin >> m;
+    sort(a,a+n);
+    cout << a[m-1];
+}

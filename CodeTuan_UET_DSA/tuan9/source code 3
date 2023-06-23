@@ -1,0 +1,67 @@
+
+// Đoạn văn câu hỏi
+// Cho 1 mảng gồm n số nguyên đã sắp xếp. Xây dựng cây nhị phân tìm kiếm từ mảng trên và in theo thứ tự level-order
+
+// For example:
+
+// Input	    Result
+// 5           3
+// 1 2 3 4 5   2 4
+//             1 5
+            
+            #include<bits/stdc++.h>
+using namespace std;
+
+struct node{
+  int data;
+  node* right;
+  node* left;
+};
+typedef node* Node;
+Node makeNode(int val) {
+    Node t=new node;
+    t->data=val;
+    t->left = NULL;
+    t->right = NULL;
+    return t;
+}
+void addNode(Node &root, int val) {
+    if(root == NULL) root=makeNode(val);
+    else {
+        if(root->data >= val) addNode(root->left,val);
+        else addNode(root->right,val);
+    }
+}
+void add(int a[],int l,int r,Node &root) {
+    if(l>r) return;
+    int mid = (l+r+1)/2;
+    addNode(root,a[mid]);
+    add(a,l,mid-1,root);
+    add(a,mid+1,r,root);
+}
+void print(Node root) {
+    queue<Node> q1;
+    q1.push(root);
+    while(q1.size()) {
+        queue<Node> q2;
+        while(q1.size()) {
+            Node a = q1.front(); q1.pop();
+            if(a->left!=NULL) q2.push(a->left);
+            if(a->right!=NULL) q2.push(a->right);
+            cout<<a->data<<" ";
+        }
+        cout<<endl;
+        swap(q1,q2);
+    }
+}
+int main() {
+    int n; cin>>n; 
+    int a[n];
+    Node root=NULL;
+    for(int i=0;i<n;i++) {
+        cin>>a[i];
+    }
+    add(a,0,n-1,root);
+    print(root);
+    
+}

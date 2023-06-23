@@ -1,0 +1,98 @@
+// Input với N + 1 dòng đầu như bài 1, dòng cuối là 2 số (s, d) thể hiện đỉnh đầu và cuối, viết chương trình cài đặt thuật toán Djikstra in ra đường đi ngắn nhất từ đỉnh đầu đến 
+
+// For example:
+
+// Input	Result
+// 3 3
+// 0 1 1
+// 1 2 2
+// 2 0 3
+// 0 2     3
+
+#include <iostream>
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int m, n, s,d, a[100][3], b[100], rows = 0, current, total = 0, value = 1;
+
+void addvalue(int k){
+
+int min = 1000;
+
+for(int i = 0; i<n; i++){
+
+if(a[i][0] == k){
+
+if(b[a[i][1]] == -1 || b[k] + a[i][2] < b[a[i][1]]){
+
+b[a[i][1]] = b[k] + a[i][2];
+
+}
+
+}
+
+if(a[i][1] == k){
+
+if(b[a[i][0]] == -1 || b[k] + a[i][2] < b[a[i][0]]){
+
+b[a[i][0]] = b[k] + a[i][2];
+
+}
+
+}
+
+}
+
+int now = current;
+
+for(int i = 0; i<m; i++){
+
+if(b[i] < min && b[i] >= value && i != now){
+
+min = b[i];
+
+current = i;
+
+}
+
+}
+
+value = min;
+
+total += min;
+
+}
+
+int main(){
+
+cin >> m >> n;
+
+for(int i = 0; i<n; i++){
+
+cin >> a[i][0] >> a[i][1] >> a[i][2];
+
+}
+
+for(int i = 0; i<m;i++){
+
+b[i] = -1;
+
+}
+
+cin >> s >> d;
+
+current = s;
+
+b[s] = 0;
+
+while(current != d){
+
+addvalue(current);
+
+}
+
+cout << b[d];
+
+}

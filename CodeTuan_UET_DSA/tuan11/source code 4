@@ -1,0 +1,25 @@
+// Viết chương trình loại bỏ hết các ký tự xuất hiện nhiều lần trong xâu, chỉ giữ lại lần đầu xuất hiện.
+
+// For example:
+
+// Input	            Result
+// aabbbbccccddddd     abcd
+// hello world         helo wrd
+
+#include <iostream>
+#include <cstring>
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main(){
+    string s;
+    getline(cin,s);
+    map<char,int> cs;
+    for (char c:s){
+        if(cs[c] == 0){
+        	cs[c]++;
+        	cout << c;
+		}
+    }
+}

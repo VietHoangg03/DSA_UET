@@ -1,0 +1,58 @@
+// Viết hàm merge_sort(int a[], int begin, int end) nhận đầu vào là 1 mảng a và số nguyên n thực hiện thuật toán merge sort và in ra dãy số đã sắp xếp.
+
+// For example:
+
+// Input	    Result
+// 5
+// 3 1 2 5 4   1 2 3 4 5
+
+void merge(int a[], int begin, int mid, int end) {
+    int n1 = mid - begin + 1;
+    int n2 = end - mid;
+    
+    int left[n1], right[n2];
+    
+    for(int i = 0; i < n1; i++) {
+        left[i] = a[begin + i];
+    }
+    
+    for(int j = 0; j < n2; j++) {
+        right[j] = a[mid + 1 + j];
+    }
+    
+    int i = 0, j = 0, k = begin;
+    
+    while(i < n1 && j < n2) {
+        if(left[i] <= right[j]) {
+            a[k] = left[i];
+            i++;
+        } else {
+            a[k] = right[j];
+            j++;
+        }
+        k++;
+    }
+    
+    while(i < n1) {
+        a[k] = left[i];
+        i++;
+        k++;
+    }
+    
+    while(j < n2) {
+        a[k] = right[j];
+        j++;
+        k++;
+    }
+}
+
+void merge_sort(int a[], int begin, int end) {
+    if(begin < end) {
+        int mid = begin + (end - begin) / 2;
+        
+        merge_sort(a, begin, mid);
+        merge_sort(a, mid + 1, end);
+        
+        merge(a, begin, mid, end);
+    }
+}

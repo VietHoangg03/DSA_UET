@@ -1,0 +1,116 @@
+// Viết chương trình tìm đường đi ngắn nhất cho đồ thị vô hướng. Đầu vào và đầu ra tương tự bài 3 (bỏ qua trọng số w và bỏ qua tổng trọng số cho output)
+
+// For example:
+
+// Input	Result
+// 3 3
+// 0 1
+// 1 2
+// 2 0
+// 1 2     1 2
+
+#include <iostream>
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int m, n, s,d, a[100][2], b[100][2];
+
+queue <int> q;
+
+stack <int> st;
+
+void addvalue(int k){
+
+if(b[k][1] == 0){
+
+b[k][1]++;
+
+}
+
+for(int i = 0; i<m; i++){
+
+if(a[i][0] == k && b[a[i][1]][1] == 0 ){
+
+b[a[i][1]][1]++;
+
+q.push(a[i][1]);
+
+b[a[i][1]][0] = k;
+
+}
+
+if(a[i][1] == k && b[a[i][0]][1] == 0 ){
+
+b[a[i][0]][1]++;
+
+q.push(a[i][0]);
+
+b[a[i][0]][0] = k;
+
+}
+
+}
+
+}
+
+int main(){
+
+cin >> m >> n;
+
+for(int i = 0; i<n; i++){
+
+cin >> a[i][0] >> a[i][1];
+
+}
+
+for(int i = 0; i<m; i++){
+
+b[i][0] = 0;
+
+b[i][1] = 0;
+
+}
+
+cin >> s >> d;
+
+q.push(s);
+
+while( !q.empty()){
+
+int current = q.front();
+
+q.pop();
+
+addvalue(current);
+
+if(current == d){
+
+break;
+
+}
+
+}
+
+int stacking = d;
+
+while(stacking != s){
+
+st.push(stacking);
+
+stacking = b[stacking][0];
+
+}
+
+cout << s << " ";
+
+while (!st.empty()){
+
+cout << st.top() << " ";
+
+st.pop();
+
+}
+
+}

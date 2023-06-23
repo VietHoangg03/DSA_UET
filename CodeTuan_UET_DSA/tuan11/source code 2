@@ -1,0 +1,48 @@
+// viết chương trình in ra xâu con đối xứng dài nhất trong xâu (tính cả xâu gốc, tức nếu xâu gốc là đối xứng thì in ra xâu gốc). Nễu không tồn tại đối xứng, in ra -1.
+
+// For example:
+
+// Input	    Result
+// abcdef      -1
+// abcddcbsh   bcddcb
+
+#include <iostream>
+#include <bits/stdc++.h>
+using namespace std;
+ 
+
+void printSubStr(string str, int low, int high)
+{
+    for (int i = low; i <= high; ++i)
+        cout << str[i];
+}
+void longestPalSubstr(string str)
+{
+    int n = str.size();
+    int maxLength = 1, start = 0;
+
+    for (int i = 0; i < n; i++) {
+        for (int j = i; j < n; j++) {
+            int flag = 1;
+            for (int k = 0; k < (j - i + 1) / 2; k++)
+                if (str[i + k] != str[j - k])
+                    flag = 0;
+            if (flag && (j - i + 1) > maxLength) {
+                start = i;
+                maxLength = j - i + 1;
+            }
+        }
+    }
+    if(maxLength <= 1){
+    	cout << -1;
+	}else{
+		printSubStr(str, start, start + maxLength - 1);
+	}
+}
+int main()
+{
+    string str;
+    getline(cin, str);
+    longestPalSubstr(str);
+    return 0;
+}

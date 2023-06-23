@@ -1,0 +1,32 @@
+// Viết chương trình cài đặt thuật toán Dijikstra:
+
+// Cho đồ thị N đỉnh, biểu thị dưới dạng ma trận liền kề (adjacency matrix) và 2 số x, y thể hiện điểm bắt đầu và điểm kết thúc. In ra khoảng cách ngắn nhất đi từ x đến y. 
+
+// For example:
+
+// Input	        Result
+// 5
+// 0 5 0 0 0       9
+// 5 0 3 7 4
+// 0 3 0 6 2
+// 0 7 6 0 0
+// 0 4 2 0 0
+// 0 4
+
+#include <iostream>
+
+using namespace std;
+
+int n,x,y,a[100][100];
+
+void check(int k){
+	for(int i = 0; i<n; i++){
+		for(int j = 0; j<n; j++){
+			if(a[i][k] != 0 && a[k][j] != 0){
+				if((a[i][k] + a[k][j] < a[i][j]) || (a[i][j] == 0)){
+					a[i][j] = a[i][k] + a[k][j];
+				}
+			}
+		}
+	}
+}

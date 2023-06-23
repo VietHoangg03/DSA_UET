@@ -1,0 +1,39 @@
+// Viết chương trình đảo ngược các từ trong câu
+
+// For example:
+
+// Input	                Result
+// hello world             world hello
+// this is a sentence      sentence a is this
+
+#include <iostream>
+#include <bits/stdc++.h>
+#include <cstring>
+using namespace std;
+ 
+stack <char> st;
+int main()
+{
+    string s;
+    getline(cin, s);
+    int n = s.size();
+    for(int i = n-1; i>=0; i--){
+    	if(s[i] != ' '){
+    		st.push(s[i]);
+		}else{
+			while(!st.empty()){
+				cout << st.top();
+				st.pop();
+			}
+			cout << " ";
+		}
+		if(i == 0){
+			while(!st.empty()){
+				cout << st.top();
+				st.pop();
+			}
+			cout << " ";
+		}
+	}
+    return 0;
+}

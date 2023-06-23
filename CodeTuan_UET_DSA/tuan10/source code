@@ -1,0 +1,117 @@
+// Viết chương trình cài đặt thuật toán Kruskal.
+
+// Input: Dòng đầu là 2 số nguyên M, N thể hiện số đỉnh và số cạnh đồ thị (đỉnh đánh số từ 0 -> M - 1)
+
+// N dòng sau là N bộ số (x, y, w) thể hiện cạnh từ đỉnh x đến y, có trọng số w.
+
+// Output: In ra cây bao trùm nhỏ nhất có định dạng sau: giả sử cây có K cạnh, output là K dòng (x, y, w) thể hiện cạnh như input. Dòng cuối là tổng trọng số của cây.
+
+// For example:
+
+// Input	
+// 3 3
+// 0 1 1
+// 1 2 2
+// 2 0 3
+// Result
+// 0 1 1
+// 1 2 2
+// 3
+
+#include <iostream>
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int line = 0,total = 0,m,n,a[100][3], b[100][3], maximum;
+
+void checkloop(int k){
+
+int temp = b[k][1];
+
+for(int i = 0; i<n; i++){
+
+if(b[i][0] == temp){
+
+b[i][0] = b[k][0];
+
+}
+
+if(b[i][1] == temp){
+
+b[i][1] = b[k][0];
+
+}
+
+}
+
+for(int i = 0; i<n; i++){
+
+if(b[i][0] == b[i][1]){
+
+b[i][2] = -1;
+
+}
+
+}
+
+}
+
+void find(){
+
+int min = maximum, current;
+
+for(int i = 0; i<n; i++){
+
+if(b[i][2] != -1 && b[i][2] < min){
+
+min = b[i][2];
+
+current = i;
+
+}
+
+}
+
+checkloop(current);
+
+cout << a[current][0] << " " <<a[current][1] << " " <<a[current][2] << endl;
+
+total+=a[current][2];
+
+line++;
+
+}
+
+int main(){
+
+cin >> m >>n;
+
+for (int i = 0; i<n; i++){
+
+cin >> a[i][0] >> a[i][1] >> a[i][2];
+
+if(maximum < a[i][2]){
+
+maximum = a[i][2];
+
+}
+
+b[i][0] = a[i][0];
+
+b[i][1] = a[i][1];
+
+b[i][2] = a[i][2];
+
+}
+
+while (line < m-1){
+
+find();
+
+}
+
+cout << total;
+
+}
